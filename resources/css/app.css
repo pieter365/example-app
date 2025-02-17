@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+/* Apply Google Font */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fa; /* Light background */
+    color: #333; /* Dark text */
+}
+
+/* Navigation Bar Styles */
+.navbar-custom {
+    background-color: #1a202c; /* Dark background */
+    border-bottom: 1px solid #2d3748; /* Slightly lighter border */
+}
+
+.navbar-brand {
+    font-weight: 500;
+    color: #f7fafc; /* Light text */
+}
+
+.nav-link {
+    font-weight: 400;
+    color: #f7fafc; /* Light text */
+}
+
+.nav-link:hover {
+    color: #e2e8f0; /* Lighter on hover */
+}
+
+/* Badge Styles */
+.badge {
+    background-color: #e53e3e; /* Red color for badge */
+    color: #fff;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #1a202c; /* Dark background */
+    color: #f7fafc; /* Light text */
+}
+
+footer a {
+    color: #e2e8f0; /* Light link color */
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Footer Links */
+footer ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+footer ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/* Container for content */
+.container {
+    max-width: 1200px;
+}
+
+/* Product Card */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-weight: 500;
+    color: #1a202c; /* Dark text */
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav li {
+        margin-bottom: 10px;
+    }
+
+    footer ul {
+        text-align: center;
+    }
+}
