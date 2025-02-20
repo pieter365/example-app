@@ -18,6 +18,7 @@ class Product extends Model
         'name',
         'description',
         'price',
+        'expires_at',
     ];
 
     /**
@@ -40,5 +41,15 @@ class Product extends Model
     public function getFormattedPriceAttribute()
     {
         return '£' . number_format($this->price, 2);
+    }
+
+    /**
+     * Check if the product is expired.
+     *
+     * @return bool
+     */
+    public function isExpired(): bool
+    {
+        return $this->expires_at && $this->expires_at < now();
     }
 }

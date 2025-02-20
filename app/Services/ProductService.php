@@ -6,6 +6,7 @@ use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Models\Product;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Carbon\Carbon;
 
 /**
  * ProductService class
@@ -29,7 +30,9 @@ class ProductService
      */
     public function getAllProducts(int $perPage = 20): LengthAwarePaginator
     {
-        return $this->productRepository->paginate($perPage);
+        return $this->productRepository->paginate($perPage)->filter(function ($product) {
+            return !$this->isExpired($product);
+        });
     }
 
     /**
@@ -49,13 +52,14 @@ class ProductService
     }
 
     /**
-     * Create a new product.
+     * Create a new product with an expiration date set to 3 months from now.
      *
      * @param array $data
      * @return Product
      */
     public function createProduct(array $data): Product
     {
+        $data['expires_at'] = $this->setExpirationDate();
         return $this->productRepository->create($data);
     }
 
@@ -90,5 +94,26 @@ class ProductService
             throw new ModelNotFoundException("Product not found");
         }
         return $this->productRepository->delete($id);
+    }
+
+    /**
+     * Check if a product is expired.
+     *
+     * @param Product $product
+     * @return bool
+     */
+    public function isExpired(Product $product): bool
+    {
+        return $product->expires_at && $product->expires_at < now();
+    }
+
+    /**
+     * Set the expiration date to 3 months from now.
+     *
+     * @return Carbon
+     */
+    protected function setExpirationDate(): Carbon
+    {
+        return now()->addMonths(3);
     }
 }
